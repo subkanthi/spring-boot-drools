@@ -26,6 +26,15 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-webflux')
+	// https://mvnrepository.com/artifact/org.kie/kie-api
+	compile group: 'org.kie', name: 'kie-api', version: '7.9.0.Final'
+
+	// https://mvnrepository.com/artifact/org.drools/drools-core
+	compile group: 'org.drools', name: 'drools-core', version: '7.9.0.Final'
+
+	// https://mvnrepository.com/artifact/org.drools/drools-compiler
+	compile group: 'org.drools', name: 'drools-compiler', version: '7.9.0.Final'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
 }
