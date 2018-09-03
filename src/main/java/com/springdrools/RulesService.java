@@ -6,12 +6,14 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * Singleton class that wraps
  * the Drools KieSession and is responsible
  * for loading rules and firing rules.
  */
+@Component
 public class RulesService {
 
     private KieServices ks;
@@ -34,5 +36,10 @@ public class RulesService {
         this.ks = KieServices.Factory.get();
         this.kContainer = ks.getKieClasspathContainer();
         this.kieSession =  kContainer.newKieSession();
+    }
+
+    public int fireRules() {
+        return this.kieSession.fireAllRules();
+
     }
 }

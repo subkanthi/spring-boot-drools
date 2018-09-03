@@ -14,5 +14,8 @@ public class RulesStartupService {
     public void init() {
         // Load all rules into Kie session.
         this.rulesService.initializeRules();
+        System.out.println("RulesStartupService initialize rules");
+
     }
+
 }
