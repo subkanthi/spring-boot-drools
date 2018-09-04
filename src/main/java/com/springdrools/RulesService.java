@@ -20,7 +20,7 @@ public class RulesService {
     private KieContainer kContainer;
     private KieSession kieSession;
 
-    @Bean("accountService")
+    @Bean("RulesService")
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public RulesService getRulesService() {
         return new RulesService();
