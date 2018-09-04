@@ -38,7 +38,8 @@ public class RulesService {
         this.kieSession =  kContainer.newKieSession();
     }
 
-    public int fireRules() {
+    public int fireRules(Item item) {
+        this.kieSession.insert(item);
         return this.kieSession.fireAllRules();
 
     }
