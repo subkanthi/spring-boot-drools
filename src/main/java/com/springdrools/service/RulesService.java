@@ -1,5 +1,6 @@
-package com.springdrools;
+package com.springdrools.service;
 
+import com.springdrools.model.Item;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -38,9 +39,9 @@ public class RulesService {
         this.kieSession =  kContainer.newKieSession();
     }
 
-    public int fireRules(Item item) {
+    public Item fireRules(Item item) {
         this.kieSession.insert(item);
-        return this.kieSession.fireAllRules();
-
+        this.kieSession.fireAllRules();
+        return item;
     }
 }

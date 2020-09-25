@@ -1,6 +1,6 @@
 package com.springdrools.rules
 
-import com.springdrools.Item;
+import com.springdrools.model.Item;
 
 rule "Classify Item - Low Range"
     when

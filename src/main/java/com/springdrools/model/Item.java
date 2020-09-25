@@ -1,4 +1,4 @@
-package com.springdrools;
+package com.springdrools.model;
 
 
 import java.io.Serializable;
@@ -18,21 +18,19 @@ public class Item implements Serializable {
     private Long id;
     private String name;
     private Double cost;
-    private Double salePrice;
     private Category category;
 
     public Item() {
     }
 
-    public Item(String name, Double cost, Double salePrice) {
-        this(null, name, cost, salePrice);
+    public Item(String name, Double cost) {
+        this(null, name, cost);
     }
 
-    public Item(Long id, String name, Double cost, Double salePrice) {
+    public Item(Long id, String name, Double cost) {
         this.id = id;
         this.name = name;
         this.cost = cost;
-        this.salePrice = salePrice;
         this.category = Category.NA;
     }
 
@@ -50,14 +48,6 @@ public class Item implements Serializable {
 
     public void setCost(Double cost) {
         this.cost = cost;
-    }
-
-    public Double getSalePrice() {
-        return salePrice;
-    }
-
-    public void setSalePrice(Double salePrice) {
-        this.salePrice = salePrice;
     }
 
     public Long getId() {
@@ -82,7 +72,6 @@ public class Item implements Serializable {
         hash = 59 * hash + Objects.hashCode(this.id);
         hash = 59 * hash + Objects.hashCode(this.name);
         hash = 59 * hash + Objects.hashCode(this.cost);
-        hash = 59 * hash + Objects.hashCode(this.salePrice);
         hash = 59 * hash + Objects.hashCode(this.category);
         return hash;
     }
@@ -105,9 +94,6 @@ public class Item implements Serializable {
         if (!Objects.equals(this.cost, other.cost)) {
             return false;
         }
-        if (!Objects.equals(this.salePrice, other.salePrice)) {
-            return false;
-        }
         if (this.category != other.category) {
             return false;
         }
@@ -117,7 +103,7 @@ public class Item implements Serializable {
     @Override
     public String toString() {
         return "Item{" + "id=" + id + ", name=" + name + ", cost=" + cost
-                + ", salePrice=" + salePrice + ", category=" + category + '}';
+                +  "category=" + category + '}';
     }
 
 }
