@@ -91,6 +91,7 @@ Implement the following:
 	3. Subtotal Pretax  
 	4. Tax  
 	5. Total after Tax  
+6. TESTING!!! Write tests for each public method in Service
 	
 	
 # Useful Drools Resources
