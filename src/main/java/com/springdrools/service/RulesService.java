@@ -44,4 +44,10 @@ public class RulesService {
         this.kieSession.fireAllRules();
         return item;
     }
+
+    public Purchase firePurchaseRules(Purchase purchase) {
+        this.kieSession.insert(purchase);
+        this.kieSession.fireAllRules();
+        return purchase;
+    }
 }

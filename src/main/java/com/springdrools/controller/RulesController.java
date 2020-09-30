@@ -24,6 +24,8 @@ public class RulesController {
     // TODO: Implement this method according to the patterns we suggested earlier
     @PostMapping("/purchase")
     public Double totalCost(@RequestBody Purchase purchase) {
-        throw new UnsupportedOperationException();
+        Purchase finished = this.rulesService.fireRules(purchase);
+        System.out.println(purchase.toString());
+        return purchase.getTotalCost();
     }
 }
