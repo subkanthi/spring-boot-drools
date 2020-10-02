@@ -24,7 +24,7 @@ public class RulesController {
     // TODO: Implement this method according to the patterns we suggested earlier
     @PostMapping("/purchase")
     public Double totalCost(@RequestBody Purchase purchase) {
-        Purchase finished = this.rulesService.fireRules(purchase);
+        Purchase finished = this.rulesService.firePurchaseRules(purchase);
         System.out.println(purchase.toString());
         return purchase.getTotalCost();
     }

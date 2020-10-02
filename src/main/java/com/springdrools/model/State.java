@@ -1,15 +1,14 @@
 package com.springdrools.model;
 import java.util.Map;
-import java.util.Map.entry;
 
 public class State {
 
     private String name;
-    private Map<String, Double> tax = Map.ofEntries(
-            entry("California", 7.25),
-            entry("Colorado", 2.90),
-            entry("India", 18.),
-            entry("British Columbia", 12.)
+    private Map<String, Double> tax = Map.of(
+            "California", 7.25,
+            "Colorado", 2.90,
+            "India", 18.,
+            "British Columbia", 12.
     );
 
     public State() {
