@@ -1,15 +1,18 @@
 package com.springdrools.model;
+import java.util.HashMap;
 import java.util.Map;
 
 public class State {
 
     private String name;
-    private Map<String, Double> tax = Map.of(
-            "California", 7.25,
-            "Colorado", 2.90,
-            "India", 18.,
-            "British Columbia", 12.
-    );
+    private Map<String, Double> tax = new HashMap<String, Double>() {
+        {
+            put("California", 7.25);
+            put("Colorado", 2.90);
+            put("India", 18.);
+            put("British Columbia", 12.);
+        }
+    };
 
     public State() {
     }
