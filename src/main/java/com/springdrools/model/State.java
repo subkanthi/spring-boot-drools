@@ -1,11 +1,12 @@
 package com.springdrools.model;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 public class State {
 
     private String name;
-    private Map<String, Double> tax = new HashMap<String, Double>() {
+    private HashMap<String, Double> tax = new HashMap<String, Double>()
+    {
         {
             put("California", 7.25);
             put("Colorado", 2.90);

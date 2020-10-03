@@ -1,27 +1,24 @@
 package com.springdrools.model;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class Purchase {
     //TODO: Implement this model
-    private ArrayList<Item> items;
-    private HashMap<Item, Double> discounts;
+    private HashMap<Item, Double> items;
     private State stateCreated;
     private double totalDiscount;
 
     public Purchase(State s) {
-        items = new ArrayList<>();
-        discounts = new HashMap<>();
+        items = new HashMap<>();
         stateCreated = s;
         totalDiscount = 0;
     }
 
     public void addItem(Item i) {
-        items.add(i);
+        items.put(i, 1.0);
     }
 
-    public ArrayList<Item> getItems() {
+    public HashMap<Item, Double> getItems() {
         return items;
     }
 
@@ -34,11 +31,7 @@ public class Purchase {
     }
 
     public void discountItem(Item i, double amt) {
-        discounts.put(i, amt * (discounts.containsKey(i) ? discounts.get(i) : 1));
-    }
-
-    public HashMap<Item, Double> getDiscounts() {
-        return discounts;
+        items.put(i, amt * items.get(i));
     }
 
     public void setTotalDiscount(double discount) {
@@ -51,21 +44,22 @@ public class Purchase {
 
     public double getTotalCost() {
         double sum = 0;
-        for (Item i : items) {
-            sum += i.getCost() * (discounts.containsKey(i) ? discounts.get(i) : 1);
+        for (Entry<Item, Double> i : items.entrySet()) {
+            sum += i.getKey().getCost() * i.getValue();
         }
         return sum * (1 - totalDiscount);
     }
 
     @Override
     public String toString() {
-        String result = "Discounts:\n";
-        for (Entry<Item, Double> e : discounts.entrySet()) {
-            result += (e.getKey().getName() + ": " + e.getValue() + "\n");
-        }
+        String result = "";
         result += "\nItems:\n";
-        for (Entry<Item, Double> e : discounts.entrySet()) {
-            result += e.getKey().toString() + "\n";
+        for (Entry<Item, Double> e : items.entrySet()) {
+            result += e.getKey().toString();
+            if (e.getValue() != 1) {
+                result += "\nDiscount: " + e.getValue();
+            }
+            result += "\n";
         }
         double cost = getTotalCost();
         double tax = cost * stateCreated.getTax();
