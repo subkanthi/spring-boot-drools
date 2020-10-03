@@ -2,25 +2,22 @@ package com.springdrools.model;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-public class Purchase {
+import java.io.Serializable;
+
+public class Purchase implements Serializable {
     //TODO: Implement this model
     private HashMap<Item, Double> items;
-    private String stateCreated;
+    private String state;
     private double totalDiscount;
+    private double tax;
 
-    private HashMap<String, Double> taxes = new HashMap<String, Double>()
-    {
-        {
-            put("California", 7.25);
-            put("Colorado", 2.90);
-            put("India", 18.);
-            put("British Columbia", 12.);
-        }
-    };
+    public Purchase() {
+        this("");
+    }
 
     public Purchase(String state) {
         items = new HashMap<>();
-        stateCreated = state;
+        this.state = state;
         totalDiscount = 0;
     }
 
@@ -32,12 +29,12 @@ public class Purchase {
         return items;
     }
 
-    public String getStateCreated() {
-        return stateCreated;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setStateCreated(String s) {
-        stateCreated = s;
+    public String getState() {
+        return state;
     }
 
     public void discountItem(Item i, double amt) {
@@ -52,12 +49,20 @@ public class Purchase {
         return totalDiscount;
     }
 
+    public void setTax(double t) {
+        tax = t;
+    }
+
+    public double getTax() {
+        return tax;
+    }
+
     public double getTotalCost() {
         double sum = 0;
         for (Entry<Item, Double> i : items.entrySet()) {
             sum += i.getKey().getCost() * i.getValue();
         }
-        return sum * (1 - totalDiscount);
+        return sum;
     }
 
     @Override
@@ -71,11 +76,11 @@ public class Purchase {
             }
             result += "\n";
         }
-        double cost = getTotalCost();
-        double tax = cost * 0.01 * taxes.get(stateCreated);
+        double cost = getTotalCost()  * (1 - totalDiscount);
+        double t = cost * 0.01 * tax;
         result += "\nSubtotal Pretax: " + cost;
-        result += "\nTax: " + tax;
-        result += "\nTotal after Tax: " + (tax + cost);
+        result += "\nTax: " + t;
+        result += "\nTotal after Tax: " + (t + cost);
         return result;
     }
 }
