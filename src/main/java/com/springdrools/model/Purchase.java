@@ -5,12 +5,22 @@ import java.util.Map.Entry;
 public class Purchase {
     //TODO: Implement this model
     private HashMap<Item, Double> items;
-    private State stateCreated;
+    private String stateCreated;
     private double totalDiscount;
 
-    public Purchase(State s) {
+    private HashMap<String, Double> taxes = new HashMap<String, Double>()
+    {
+        {
+            put("California", 7.25);
+            put("Colorado", 2.90);
+            put("India", 18.);
+            put("British Columbia", 12.);
+        }
+    };
+
+    public Purchase(String state) {
         items = new HashMap<>();
-        stateCreated = s;
+        stateCreated = state;
         totalDiscount = 0;
     }
 
@@ -22,11 +32,11 @@ public class Purchase {
         return items;
     }
 
-    public State getStateCreated() {
+    public String getStateCreated() {
         return stateCreated;
     }
 
-    public void setStateCreated(State s) {
+    public void setStateCreated(String s) {
         stateCreated = s;
     }
 
@@ -62,7 +72,7 @@ public class Purchase {
             result += "\n";
         }
         double cost = getTotalCost();
-        double tax = cost * stateCreated.getTax();
+        double tax = cost * 0.01 * taxes.get(stateCreated);
         result += "\nSubtotal Pretax: " + cost;
         result += "\nTax: " + tax;
         result += "\nTotal after Tax: " + (tax + cost);

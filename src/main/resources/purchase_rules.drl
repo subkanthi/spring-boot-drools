@@ -1,0 +1,10 @@
+package com.springdrools.rules
+
+import com.springdrools.model.Purchase;
+
+//rule "Classify Item - Low Range"
+//    when
+//        $i: Purchase(cost < 200)
+//    then
+//        $i.setCategory(Item.Category.LOW_RANGE);
+//end

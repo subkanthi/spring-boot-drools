@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class State {
 
     private String name;
-    private HashMap<String, Double> tax = new HashMap<>()
+    private HashMap<String, Double> tax = new HashMap<String, Double>()
     {
         {
             put("California", 7.25);
