@@ -18,6 +18,7 @@ public class Item implements Serializable {
     private Long id;
     private String name;
     private Double cost;
+    private Double discount;
     private Category category;
 
     public Item() {
@@ -32,6 +33,7 @@ public class Item implements Serializable {
         this.name = name;
         this.cost = cost;
         this.category = Category.NA;
+        this.discount = 0.0;
     }
 
     public String getName() {
@@ -48,6 +50,14 @@ public class Item implements Serializable {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public Long getId() {

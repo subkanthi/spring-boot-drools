@@ -1,10 +1,25 @@
 package com.springdrools.rules
 
+import com.springdrools.model.Item;
 import com.springdrools.model.Purchase;
 
-//rule "Classify Item - Low Range"
-//    when
-//        $i: Purchase(cost < 200)
-//    then
-//        $i.setCategory(Item.Category.LOW_RANGE);
-//end
+rule "Set Total Discount"
+    when
+        $i: Purchase(totalCost > 100)
+    then
+        $i.setTotalDiscount(12.0);
+end
+
+rule "Apples on Sale"
+    when
+        $i: Item(name == "Apples")
+    then
+        $i.setDiscount(0.2);
+end
+
+rule "Bananas on Sale"
+    when
+        $i: Item(name == "Bananas")
+    then
+        $i.setDiscount(0.1);
+end
