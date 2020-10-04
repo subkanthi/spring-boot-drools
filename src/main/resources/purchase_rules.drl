@@ -1,5 +1,6 @@
 package com.springdrools.rules
 
+import com.springdrools.model.Item;
 import com.springdrools.model.Purchase;
 
 rule "Set Total Discount"
@@ -7,4 +8,18 @@ rule "Set Total Discount"
         $i: Purchase(totalCost > 100)
     then
         $i.setTotalDiscount(12.0);
+end
+
+rule "Apples on Sale"
+    when
+        $i: Item(name == "Apples")
+    then
+        $i.setDiscount(0.2);
+end
+
+rule "Bananas on Sale"
+    when
+        $i: Item(name == "Bananas")
+    then
+        $i.setDiscount(0.1);
 end

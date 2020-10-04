@@ -20,7 +20,7 @@ public class State {
 
     public double getTax() {
         if (tax.containsKey(name)) {
-            return 0.01 * tax.get(name);
+            return tax.get(name);
         }
         return 0;
     }

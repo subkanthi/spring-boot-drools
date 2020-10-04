@@ -59,10 +59,10 @@ public class Purchase implements Serializable {
         String result = "";
         result += "\nItems:\n";
         for (Item i : items) {
-            result += i.toString();
-//            if (i.getDiscount() != 0) {
-//                result += "Discount: " + 100 * i.getDiscount() + "%\n";
-//            }
+            result += i.toString() + "\n";
+            if (i.getDiscount() != 0) {
+                result += "Discount: " + 100 * i.getDiscount() + "%\n";
+            }
         }
         double cost = sumItemCosts() * (1 - 0.01 * totalDiscount);
         double t = cost * 0.01 * state.getTax();

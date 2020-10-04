@@ -8,17 +8,3 @@ rule "Classify Item - Low Range"
     then
         $i.setCategory(Item.Category.LOW_RANGE);
 end
-
-rule "Apples on Sale"
-    when
-        $i: Item(name == "Apples")
-    then
-        $i.setDiscount(0.2);
-end
-
-rule "Bananas on Sale"
-    when
-        $i: Item(name == "Bananas")
-    then
-        $i.setDiscount(0.1);
-end
