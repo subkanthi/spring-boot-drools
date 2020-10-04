@@ -1,44 +1,37 @@
 package com.springdrools.model;
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.ArrayList;
 
 import java.io.Serializable;
 
 public class Purchase implements Serializable {
-    //TODO: Implement this model
-    private HashMap<Item, Double> items;
-    private String state;
+
+    private ArrayList<Item> items;
+    private State state;
     private double totalDiscount;
-    private double tax;
 
-    public Purchase() {
-        this("");
-    }
-
-    public Purchase(String state) {
-        items = new HashMap<>();
+    public Purchase(State state, Item[] items) {
+        this.items = new ArrayList<>();
+        for (Item i : items) {
+            addItem(i);
+        }
         this.state = state;
         totalDiscount = 0;
     }
 
     public void addItem(Item i) {
-        items.put(i, 1.0);
+        items.add(i);
     }
 
-    public HashMap<Item, Double> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
-    }
-
-    public void discountItem(Item i, double amt) {
-        items.put(i, amt * items.get(i));
     }
 
     public void setTotalDiscount(double discount) {
@@ -49,38 +42,37 @@ public class Purchase implements Serializable {
         return totalDiscount;
     }
 
-    public void setTax(double t) {
-        tax = t;
-    }
-
-    public double getTax() {
-        return tax;
+    private double sumItemCosts() {
+        double sum = 0;
+        for (Item i : items) {
+            sum += i.getCost();
+        }
+        return sum;
     }
 
     public double getTotalCost() {
-        double sum = 0;
-        for (Entry<Item, Double> i : items.entrySet()) {
-            sum += i.getKey().getCost() * i.getValue();
-        }
-        return sum;
+        return round(sumItemCosts() * (1 - 0.01 * totalDiscount) * (1 + 0.01 * state.getTax()));
     }
 
     @Override
     public String toString() {
         String result = "";
         result += "\nItems:\n";
-        for (Entry<Item, Double> e : items.entrySet()) {
-            result += e.getKey().toString();
-            if (e.getValue() != 1) {
-                result += "\nDiscount: " + e.getValue();
-            }
-            result += "\n";
+        for (Item i : items) {
+            result += i.toString();
+//            if (i.getDiscount() != 0) {
+//                result += "Discount: " + 100 * i.getDiscount() + "%\n";
+//            }
         }
-        double cost = getTotalCost()  * (1 - totalDiscount);
-        double t = cost * 0.01 * tax;
-        result += "\nSubtotal Pretax: " + cost;
-        result += "\nTax: " + t;
-        result += "\nTotal after Tax: " + (t + cost);
+        double cost = sumItemCosts() * (1 - 0.01 * totalDiscount);
+        double t = cost * 0.01 * state.getTax();
+        result += "\nSubtotal Pretax: " + round(cost);
+        result += "\nTax: " + round(t);
+        result += "\nTotal after Tax: " + round(t + cost);
         return result;
+    }
+
+    private static double round(double d) {
+        return Math.round(d * 100) / 100.;
     }
 }

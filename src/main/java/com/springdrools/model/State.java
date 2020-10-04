@@ -1,11 +1,10 @@
 package com.springdrools.model;
-import java.util.Map;
 import java.util.HashMap;
 
 public class State {
 
-    private String name;
-    private HashMap<String, Double> tax = new HashMap<String, Double>()
+    private final String name;
+    private final HashMap<String, Double> tax = new HashMap<String, Double>()
     {
         {
             put("California", 7.25);
@@ -15,18 +14,14 @@ public class State {
         }
     };
 
-    public State() {
-    }
-
-    public void setName(String s) {
-        name = s;
-    }
-
-    public String getName() {
-        return name;
+    public State(String name) {
+        this.name = name;
     }
 
     public double getTax() {
-        return 0.01 * tax.get(name);
+        if (tax.containsKey(name)) {
+            return 0.01 * tax.get(name);
+        }
+        return 0;
     }
 }

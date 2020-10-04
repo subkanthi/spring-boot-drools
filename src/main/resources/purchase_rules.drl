@@ -2,37 +2,9 @@ package com.springdrools.rules
 
 import com.springdrools.model.Purchase;
 
-rule "Set State Tax -- California"
-    when
-        $i: Purchase(state == "California")
-    then
-        $i.setTax(7.25);
-end
-
-rule "Set State Tax -- Colorado"
-    when
-        $i: Purchase(state == "Colorado")
-    then
-        $i.setTax(2.9);
-end
-
-rule "Set State Tax -- India"
-    when
-        $i: Purchase(state == "India")
-    then
-        $i.setTax(18.0);
-end
-
-rule "Set State Tax -- British Columbia"
-    when
-        $i: Purchase(state == "British Columbia")
-    then
-        $i.setTax(12.0);
-end
-
 rule "Set Total Discount"
     when
         $i: Purchase(totalCost > 100)
     then
-        $i.setTax(12.0);
+        $i.setTotalDiscount(12.0);
 end
