@@ -1,5 +1,6 @@
 package com.springdrools.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,8 +19,8 @@ public class Item implements Serializable {
     private Long id;
     private String name;
     private Double cost;
-    private Double discount;
     private Category category;
+    private Double discount = 0.0;
 
     public Item() {
     }
@@ -33,7 +34,6 @@ public class Item implements Serializable {
         this.name = name;
         this.cost = cost;
         this.category = Category.NA;
-        this.discount = 0.0;
     }
 
     public String getName() {
@@ -45,7 +45,7 @@ public class Item implements Serializable {
     }
 
     public Double getCost() {
-        return cost;
+        return cost * (1 - discount);
     }
 
     public void setCost(Double cost) {

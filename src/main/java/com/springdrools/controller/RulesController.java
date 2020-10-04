@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 public class RulesController {
 
@@ -23,9 +25,9 @@ public class RulesController {
 
     // TODO: Implement this method according to the patterns we suggested earlier
     @PostMapping("/purchase")
-    public Purchase totalCost(@RequestBody Purchase purchase) {
+    public Purchase.Result totalCost(@RequestBody Purchase purchase) {
         Purchase finished = this.rulesService.firePurchaseRules(purchase);
         System.out.println(purchase.toString());
-        return finished;
+        return finished.packageResult();
     }
 }
